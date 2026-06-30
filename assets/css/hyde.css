@@ -41,7 +41,7 @@ html {
 }
 @media (min-width: 58em) {
   html {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -56,8 +56,8 @@ html {
 .sidebar {
   text-align: center;
   padding: 2rem 1rem;
-  color: rgba(255,255,255,.5);
-  background-color: #202020;
+  /* color: rgba(255,255,255,.5); */
+  /* background-color: #202020; */
 }
 @media (min-width: 48em) {
   .sidebar {
@@ -71,9 +71,9 @@ html {
 }
 
 /* Sidebar links */
-.sidebar a {
+/* .sidebar a {
   color: #fff;
-}
+} */
 
 /* About section */
 .sidebar-about h1 {
@@ -84,9 +84,19 @@ html {
 }
 
 /* Sidebar nav */
-.sidebar-nav {
+.sidebar-nav, .sidebar-nav-mobile {
   padding-left: 0;
   list-style: none;
+  font-size: 90%;
+}
+.sidebar-nav-mobile{
+  line-height: 2em;
+}
+.sidebar-nav-inner{
+  margin-left: 0;
+}
+.sidebar span, .sidebar-nav-mobile span{
+  color :#000;
 }
 .sidebar-nav-item {
   display: block;
@@ -99,6 +109,15 @@ a.sidebar-nav-item:focus {
   font-weight: bold;
 }
 
+.sidebar-nav-mobile span:hover,
+.sidebar-nav-mobile span:focus {
+  text-decoration: underline;
+}
+
+.hidden{
+  display: none;
+}
+
 /* Sticky sidebar
  *
  * Add the `sidebar-sticky` class to the sidebar's container to affix it the
@@ -109,8 +128,19 @@ a.sidebar-nav-item:focus {
   .sidebar-sticky {
     position: absolute;
     right:  1rem;
-    bottom: 1rem;
+    /* bottom: 1rem; */
+    top: 6rem;
     left:   1rem;
+    height: 85%;
+  }
+  .sidebar-nav-mobile{
+    display: none;
+  }
+}
+
+@media (max-width: 48em) {
+  .sidebar-nav {
+    display: none;
   }
 }
 
@@ -123,12 +153,13 @@ a.sidebar-nav-item:focus {
 
 .content {
   padding-top:    4rem;
-  padding-bottom: 4rem;
+  /* padding-bottom: 4rem; */
 }
 
 @media (min-width: 48em) {
   .content {
-    max-width: 38rem;
+    /* max-width: 38rem; */
+    max-width: 60rem;
     margin-left: 20rem;
     margin-right: 2rem;
   }
@@ -138,6 +169,13 @@ a.sidebar-nav-item:focus {
   .content {
     margin-left: 22rem;
     margin-right: 4rem;
+  }
+}
+
+@media (max-width: 48em) {
+  .content {
+    padding-top:    0;
+    padding-bottom: 0;
   }
 }
 
@@ -247,4 +285,18 @@ a.sidebar-nav-item:focus {
 .theme-base-0f .content a,
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
+}
+
+.copy{
+    position: absolute;
+    right:  1rem;
+    bottom: 1rem;
+    left:   1rem;
+    font-size: .75em;
+}
+
+@media (max-width: 48em) {
+.copy{
+  display: none;
+}  
 }

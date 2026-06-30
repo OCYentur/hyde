@@ -1,21 +1,62 @@
 <aside class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <a href="{{ .Site.BaseURL }}"><h1>{{ .Site.Title }}</h1></a>
+      {{/*  <a href="{{ .Site.BaseURL }}"><h1>{{ .Site.Title }}</h1></a>  */}}
       <p class="lead">
-      {{ with .Site.Params.description }} {{.}} {{ else }}An elegant open source and mobile first theme for <a href="http://hugo.spf13.com">hugo</a> made by <a href="http://twitter.com/mdo">@mdo</a>. Originally made for Jekyll.{{end}}
+      {{ with .Site.Params.description }} {{.}} {{ else }}Gizem Candan<br>visual artist & curator{{end}}
       </p>
     </div>
 
     <nav>
       <ul class="sidebar-nav">
-        <li><a href="{{ .Site.BaseURL }}">Home</a> </li>
-        {{ range .Site.Menus.main -}}
+        {{/*  <li><a href="{{ .Site.BaseURL }}">home</a> </li>  */}}
+          {{/*  {{ range .Site.Menus.main -}}
           <li><a href="{{.URL}}"> {{ .Name }} </a></li>
-        {{- end }}
-      </ul>
+        {{- end }}  */}}
+        {{ define "render-menu" }}
+          <ul>
+            {{ range . }}
+              <li>
+                {{ if .Params.nolink}}
+                  <span>{{ .Name }}</span>
+                {{ else }}
+                  <a href="{{ .URL }}">{{ .Name }}</a>
+                {{ end }}
+                {{ if .HasChildren }}
+                  {{ template "render-menu" .Children }}
+                {{ end }}
+              </li>
+            {{ end }}
+          </ul>
+          {{ end }}
+
+          {{ template "render-menu" .Site.Menus.main }}          
+      </ul>       
+      <div class="sidebar-nav-mobile">
+      {{ define "render-menu-mobile" }}
+      
+        {{ range . }}
+          {{ if .Params.nolink}}
+            <span data-menu="{{ .Params.submenu }}" id="{{ .Identifier }}">{{ .Name }}</span>
+          {{ else }}
+            <span><a id="{{ .Identifier }}" href="{{ .URL }}">{{ .Name }}</a></span>
+          {{ end }}
+          {{ if .Params.lastitem}}
+          {{ else }}
+          |
+          {{ end }}
+        {{ end }}        
+      
+      {{ end }}
+      {{ template "render-menu-mobile" .Site.Menus.main }} 
+      <div id="works-menu" data-submenu class="hidden">
+      {{ template "render-menu-mobile" .Site.Menus.works }}   
+      </div>
+      <div id="curatorial-menu" data-submenu class="hidden">
+      {{ template "render-menu-mobile" .Site.Menus.curatorial }} 
+      </div>
     </nav>
 
-    <p>{{ with .Site.Params.copyright }}{{.}}{{ else }}&copy; {{ now.Format "2006"}}. All rights reserved. {{end}}</p>
+    <p class="copy">{{ with .Site.Params.copyright }}{{.}}{{ else }}&copy; {{ now.Format "2006"}}. All rights reserved. {{end}}</p>
   </div>
 </aside>
