@@ -8,5 +8,8 @@
     {{ if ne hugo.Environment "development"  }}
       {{ template "_internal/google_analytics.html" . }}
     {{ end }}
+  {{- partial "head_css_link.html" (dict "path" "css/lightbox.css") }}
+  {{ $lightboxJS := resources.Get "js/lightbox.js"}}
+  <script src="{{ $lightboxJS.RelPermalink }}" defer></script>
   </body>
 </html>

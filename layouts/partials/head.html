@@ -28,7 +28,7 @@
   {{ end -}}
   <!-- JS -->
   {{ $menuJS := resources.Get "js/app.js" | resources.Minify | resources.Fingerprint }}
-  <script src="{{ $menuJS.RelPermalink }}" defer></script>
+  <script src="{{ $menuJS.RelPermalink }}" defer></script> 
 
   {{ partial "hook_head_end.html" . }}
 </head>
